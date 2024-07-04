@@ -2,6 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import db from "./db.js";
 import createRouter from "./routers/createRoute.js"
+import deleteRouter from "./routers/deleteRoute.js"
+import readRouter from "./routers/readRoute.js"
+import updateRouter from "./routers/updateRoute.js"
+
 dotenv.config()
 
 const app = express();
@@ -9,10 +13,13 @@ const app = express();
 app.use(express.json())
 
 app.use('/',createRouter)
+app.use('/', deleteRouter)
+app.use('/', readRouter)
+app.use('/', updateRouter)
 
 
 app.get("/",(req,res)=>{
-    res.send("hello world")
+    res.send("get function")
 })
 
 // app.post("/",(req,res)=>{
