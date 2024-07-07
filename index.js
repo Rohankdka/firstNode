@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import db from "./db.js";
+import cors from "cors";
 import createRouter from "./routers/createRoute.js"
 import deleteRouter from "./routers/deleteRoute.js"
 import readRouter from "./routers/readRoute.js"
@@ -13,6 +14,8 @@ dotenv.config()
 const app = express();
 
 app.use(express.json())
+app.use(express.urlencoded({extended:true}));
+app.use(cors());
 
 app.use('/',createRouter)
 app.use('/', deleteRouter)
