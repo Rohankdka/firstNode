@@ -1,11 +1,14 @@
 import db from "../db.js"
 
-export const update = (req,res)=>{
-    const sql = "UPDATE user SET name = ?, email = ?, contact = ? WHERE id = ?";
+export const update = (req, res) => {
+    const { id } = req.params;
+    const { username, email, password, confirmpassword } = req.body;
 
-    const value = req.body
-    db.query(sql,[value.name, value.email, value.contact, value.id],(err, result)=>{
-        if(err) return res.status(500).send(err);
-        return res.status(200).send({message: "value Updated", result})
-    })
-}
+    const sql = "UPDATE useinfo SET username = ?, email = ?, password = ?, confirmpassword = ? WHERE id = ?";
+    const values = [username, email, password, confirmpassword, id];
+
+    db.query(sql, values, (err, result) => {
+        if (err) return res.status(500).send(err);
+        return res.status(200).send({ message: "User updated", result });
+    });
+};
